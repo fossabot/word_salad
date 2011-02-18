@@ -1,3 +1,13 @@
 === 1.0.0 / 2009-11-07
 
 * Happy Birthday Word Salad!
+
+=== 2.0.0 / 2011-02-17
+
+* switched to included wordlist for more basic words
+* switched singular methods to strings instead of arrays
+* made the variance bigger for sentence length
+* published gem to Rubygems
+* fixed bugs
+**  EOFError: end of file reached
+**  NoMethodError: undefined method `words' for 2.6187173419804153:Float

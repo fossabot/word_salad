@@ -4,39 +4,44 @@ class Fixnum
   def words
     dict = WordSalad.dictionary
     (1..self).to_a.map do |x|
-      dict.seek(rand(WordSalad.size - 1000))
-      b = dict.readchar
-      while b != 10
-        b = dict.readchar
-      end
-
-      dict.readline.strip
+      WordSalad.words[rand(WordSalad.size)].strip
     end
   end
 
-  alias :word :words
+  # Returns 1 random word
+  def word
+    1.words.first
+  end
 
-  # Returns +num+ sentences of random words around +size+
-  # number of words.
+  # Returns +num+ sentences of random words about +size+ long
   def sentences(size=10)
-    variance = size / 5
     (1..self).to_a.map do |x|
-      w = (size + (rand(variance) - variance / 2)).words
+      variance = rand(size/3 + 1)
+      variance = 0 - variance if rand(2) == 0 # plus or minus
+      w = (size + variance).words
       w[0].capitalize!
       w.join(' ') + '.'
     end
   end
 
-  alias :sentence :sentences
+  # Returns 1 sentence of random words about +size+ long
+  def sentence(size=10)
+    1.sentences(size).first
+  end
 
-  # Returns +num+ paragraphs of around +psize+ sentences,
-  # each around +ssize+ number of words
+  # Returns +num+ paragraphs of +psize+ sentences,
+  # each about +ssize+ words long
   def paragraphs(psize=5, ssize=10)
     (1..self).to_a.map do |x|
-      psize.sentences.join(' ')
+      psize.sentences(ssize).join(' ')
     end
   end
 
-  alias :paragraph :paragraphs
+  # Returns 1 paragraph of +psize+ sentences,
+  # each about +ssize+ words long
+  def paragraph(psize=5, ssize=10)
+    1.paragraphs(psize, ssize).first
+  end
+
 end
 

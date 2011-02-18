@@ -1,6 +1,0 @@
-History.txt
-Manifest.txt
-README.txt
-Rakefile
-lib/word_salad.rb
-spec/word_salad_spec.rb

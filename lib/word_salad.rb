@@ -1,27 +1,20 @@
 require "word_salad/core_ext"
 
-class WordSalad
+module WordSalad
 
-  # The current dictionary path
-  def self.dictionary_path
-    @dictionary_path ||= ["/usr/share/dict/words",
-                        "/usr/share/words"].select do |f|
-      FileTest.exists?(f)
-    end.first
+  # the dictionary as a File object
+  def self.dictionary 
+    open(File.join(File.dirname(__FILE__), "word_salad/dictionary"))
   end
 
-  # Override the default dictionary path to something special
-  def self.dictionary_path=(path)
-    @dictionary_path = path
-    @size = nil
+  # all the words in the dictionary
+  def self.words 
+    IO.readlines(self.dictionary)
   end
 
-  def self.dictionary # :nodoc:
-    open(self.dictionary_path)
-  end
-
-  def self.size  # :nodoc:
-    @size ||= File.size(self.dictionary)
+  # the number of words in the dictionary
+  def self.size  
+    @size ||= self.words.size
   end
 
 end
