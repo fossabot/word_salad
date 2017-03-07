@@ -1,4 +1,4 @@
-class Fixnum
+class Integer
 
   # Returns +num+ random words from the dictionary.
   def words
